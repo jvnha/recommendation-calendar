@@ -31,8 +31,23 @@ button {
   border-radius: 8px;
   padding: 6px 12px;
 }
-button:hover:not(:disabled) {
-  background: #f1f5f9;
+@media (hover: hover) {
+  button:hover:not(:disabled) {
+    background: #f1f5f9;
+  }
+  button.primary:hover:not(:disabled) {
+    background: #1d4ed8;
+  }
+  .day:hover {
+    background: #f8fafc;
+  }
+  .day-events li.event-chip:hover {
+    background: color-mix(in srgb, var(--event-color) 28%, white);
+  }
+  .place-main a:hover {
+    color: var(--primary);
+    text-decoration: underline;
+  }
 }
 button:disabled {
   opacity: 0.5;
@@ -42,9 +57,6 @@ button.primary {
   background: var(--primary);
   border-color: var(--primary);
   color: #fff;
-}
-button.primary:hover:not(:disabled) {
-  background: #1d4ed8;
 }
 button.danger {
   color: var(--danger);
@@ -118,9 +130,7 @@ button.danger {
   gap: 4px;
   cursor: pointer;
   overflow: hidden;
-}
-.day:hover {
-  background: #f8fafc;
+  -webkit-tap-highlight-color: transparent;
 }
 .day:focus-visible {
   outline: 2px solid var(--primary);
@@ -171,9 +181,6 @@ button.danger {
 .day-events li.event-chip {
   cursor: pointer;
 }
-.day-events li.event-chip:hover {
-  background: color-mix(in srgb, var(--event-color) 28%, white);
-}
 .day-events .time {
   font-weight: 600;
   margin-right: 4px;
@@ -200,7 +207,9 @@ button.danger {
   width: 100%;
   max-width: 460px;
   max-height: 90vh;
+  max-height: 90dvh;
   overflow-y: auto;
+  overscroll-behavior: contain;
   padding: 20px;
   box-shadow: 0 20px 50px rgba(15, 23, 42, 0.25);
 }
@@ -493,10 +502,6 @@ button.danger {
   font-weight: 600;
   text-decoration: none;
 }
-.place-main a:hover {
-  color: var(--primary);
-  text-decoration: underline;
-}
 .place-distance {
   color: var(--primary);
   font-size: 0.8rem;
@@ -505,15 +510,78 @@ button.danger {
 }
 
 @media (max-width: 640px) {
+  .app {
+    padding: 12px 8px;
+  }
+  .header h1 {
+    font-size: 1.25rem;
+  }
+  .nav button {
+    min-width: 40px;
+    min-height: 40px;
+  }
+
+  .calendar {
+    border-radius: 8px;
+  }
+  .weekday {
+    padding: 6px 0;
+    font-size: 0.75rem;
+  }
   .day {
     min-height: 72px;
-    padding: 4px;
+    padding: 3px 2px;
+    gap: 2px;
+  }
+  .day-number {
+    width: 22px;
+    height: 22px;
+    font-size: 0.75rem;
   }
   .day-events li {
     font-size: 0.65rem;
     padding: 1px 3px;
+    border-left-width: 2px;
   }
-  .day-events .time {
+  /* 칩이 너무 작아 정확히 누르기 어려우므로 탭은 날짜 칸(일정 목록)으로 */
+  .day-events li.event-chip {
+    pointer-events: none;
+  }
+  .day-events .time,
+  .day-events .more-label {
     display: none;
+  }
+
+  /* 모달은 하단 시트로 */
+  .modal-backdrop {
+    place-items: end center;
+    padding: 0;
+  }
+  .modal {
+    max-width: none;
+    max-height: 92dvh;
+    border-radius: 16px 16px 0 0;
+    padding: 16px;
+  }
+  .modal-footer button,
+  .event-actions button {
+    min-height: 40px;
+  }
+  .modal-footer button {
+    padding: 8px 16px;
+  }
+  .swatch {
+    width: 32px;
+    height: 32px;
+  }
+  .colors {
+    gap: 10px;
+  }
+  .detail-fields {
+    grid-template-columns: 56px 1fr;
+  }
+  /* iOS는 16px 미만 입력창에 포커스하면 화면을 확대함 */
+  .rec-header select {
+    font-size: 16px;
   }
 }

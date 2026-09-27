@@ -63,7 +63,10 @@ export default function CalendarGrid({
                 </li>
               ))}
               {dayEvents.length > MAX_VISIBLE && (
-                <li className="more">+{dayEvents.length - MAX_VISIBLE}개 더보기</li>
+                <li className="more">
+                  +{dayEvents.length - MAX_VISIBLE}
+                  <span className="more-label">개 더보기</span>
+                </li>
               )}
             </ul>
           </button>
