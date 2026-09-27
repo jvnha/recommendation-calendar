@@ -3,3 +3,8 @@ dist/
 .env
 *.tsbuildinfo
 .pytest_cache/
+
+# IDE / OS
+.vscode/
+.idea/
+.DS_Store
