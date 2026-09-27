@@ -9,6 +9,7 @@
 
 ```bash
 # 1. DB 실행 (Docker Desktop 필요)
+cp .env.example .env   # 최초 1회
 docker compose up -d
 
 # 2. 백엔드 (http://localhost:3000/api)
